@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAQLARO</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#090b13;color:white;
+ font-family:Arial,sans-serif;padding:25px 18px;
+}
+.container{max-width:450px;margin:auto}
+.logo{font-size:30px;font-weight:900;letter-spacing:3px}
+.logo span{color:#8b6cff}
+.sub{color:#9296aa;font-size:13px;margin-top:8px}
+.card{
+ margin-top:35px;background:#151827;
+ padding:22px;border-radius:22px;
+ border:1px solid #292d40;
+}
+h2{font-size:21px}
+p{color:#9296aa;font-size:14px;line-height:1.5}
+input{
+ width:100%;padding:16px;border-radius:12px;
+ border:1px solid #34394d;background:#0c0f1a;
+ color:white;font-size:14px;outline:none;
+}
+button{
+ width:100%;padding:16px;margin-top:15px;
+ background:linear-gradient(100deg,#7655ff,#a15cff);
+ border:0;border-radius:12px;color:white;
+ font-weight:bold;font-size:15px;
+}
+.platforms{display:flex;gap:10px;margin-top:20px}
+.platform{
+ flex:1;text-align:center;padding:14px 5px;
+ background:#151827;border-radius:12px;
+ color:#c6c9d7;font-size:12px;
+}
+.footer{text-align:center;color:#666b80;
+ margin-top:40px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="container">
+ <div class="logo">SAQLA<span>RO.</span></div>
+ <div class="sub">YOUR MEDIA DOWNLOADER</div>
+
+ <div class="card">
+  <h2>Media yuklab olish</h2>
+  <p>Media havolasini kiriting va davom eting.</p>
+  <input id="url" type="url"
+  placeholder="Havolani shu yerga joylang...">
+  <button onclick="downloadMedia()">Davom etish →</button>
+  <p id="message"></p>
+ </div>
+
+ <div class="platforms">
+  <div class="platform">Instagram</div>
+  <div class="platform">TikTok</div>
+  <div class="platform">YouTube</div>
+ </div>
+
+ <div class="footer">
+  SAQLARO © 2026 · Made with care
+ </div>
+</div>
+
+<script>
+function downloadMedia(){
+ const url=document.getElementById("url").value;
+ const message=document.getElementById("message");
+ if(!url){
+  message.textContent="Avval havola kiriting!";
+  return;
+ }
+ message.textContent="Havola qabul qilindi. Keyingi bosqichda yuklashni ulaymiz.";
+}
+</script>
+</body>
+</html>
+0
+0
+

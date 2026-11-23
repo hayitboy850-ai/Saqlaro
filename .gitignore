@@ -1,0 +1,10 @@
+.env
+*.key
+*.jks
+*.keystore
+__pycache__/
+*.pyc
+venv/
+.venv/
+downloads/
+*.apk
