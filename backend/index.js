@@ -7,11 +7,28 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json({ limit: '16kb' }));
 
+const platforms = [
+    { name: 'Instagram', domains: ['instagram.com'] },
+    { name: 'TikTok', domains: ['tiktok.com'] },
+    { name: 'YouTube', domains: ['youtube.com', 'youtu.be'] }
+];
+
+function detectPlatform(url) {
+    const host = url.hostname.toLowerCase();
+
+    return platforms.find(item =>
+        item.domains.some(domain =>
+            host === domain || host.endsWith('.' + domain)
+        )
+    );
+}
+
 app.get('/', (req, res) => {
     res.json({
         app: 'SAQLARO',
         status: 'online',
-        version: '1.0.0'
+        version: '1.1.0',
+        platforms: ['Instagram', 'TikTok', 'YouTube']
     });
 });
 
@@ -50,25 +67,24 @@ app.post('/api/check', (req, res) => {
         });
     }
 
-    const host = parsed.hostname.toLowerCase();
+    const platform = detectPlatform(parsed);
 
-    const platforms = [
-        { name: 'Instagram', domains: ['instagram.com'] },
-        { name: 'TikTok', domains: ['tiktok.com'] },
-        { name: 'YouTube', domains: ['youtube.com', 'youtu.be'] }
-    ];
+    if (!platform) {
+        return res.status(400).json({
+            success: false,
+            accepted: false,
+            message: 'Bu platforma hozircha qo‘llab-quvvatlanmaydi.'
+        });
+    }
 
-    const platform = platforms.find(item =>
-        item.domains.some(domain =>
-            host === domain || host.endsWith('.' + domain)
-        )
-    );
-
-    res.json({
+    return res.json({
         success: true,
         accepted: true,
-        platform: platform ? platform.name : 'Other',
-        message: 'Havola tekshirildi. Yuklash xizmati hali ulanmagan.'
+        platform: platform.name,
+        previewAvailable: false,
+        downloadAvailable: false,
+        formats: [],
+        message: 'Havola tekshirildi. Media ma’lumotlarini olish va yuklash xizmati hali ulanmagan.'
     });
 });
 
